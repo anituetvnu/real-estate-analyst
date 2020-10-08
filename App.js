@@ -2,56 +2,45 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import LocationScreen from "./screens/LocationScreen";
-import NotificationScreen from "./screens/NotificationScreen";
-import AttentionScreen from "./screens/AttentionScreen";
-import SavedScreen from "./screens/SavedScreen";
-import MoreScreen from "./screens/MoreScreen";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Feather } from "@expo/vector-icons";
+import { MapScreen, SearchScreen } from "./src/screens";
 
-import { AntDesign } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const routeIcons = {
-  Location: "find",
-  Notification: "bells",
-  Attention: "exclamationcircleo",
-  Saved: "staro",
-  More: "ellipsis1",
+
+  Map: "map-pin",
+  Search: "search",
+
 };
 
 export default function App() {
   return (
-    <NavigationContainer independent="Location">
+
+    <NavigationContainer style={styles.container}>
       <Tab.Navigator
-        initialRouteName="Location"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => (
-            <AntDesign
+            <Feather
               name={routeIcons[route.name]}
-              size={30}
-              color={focused ? "orange" : "grey"}
+              size={24}
+              color={focused ? "blue" : "grey"}
+
             />
           ),
         })}
         tabBarOptions={{
-          activeTintColor: "orange",
+          activeTintColor: "blue",
           inactiveTintColor: "grey",
         }}
       >
-        <Tab.Screen name="Location" component={LocationScreen}></Tab.Screen>
-        <Tab.Screen
-          name="Notification"
-          component={NotificationScreen}
-        ></Tab.Screen>
-        <Tab.Screen name="Attention" component={AttentionScreen}></Tab.Screen>
-        <Tab.Screen name="Saved" component={SavedScreen}></Tab.Screen>
-        <Tab.Screen name="More" component={MoreScreen}></Tab.Screen>
+        <Tab.Screen name="Map" component={MapScreen} />
+        <Tab.Screen name="Search" component={SearchScreen} />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
