@@ -1,21 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Feather } from "@expo/vector-icons";
 import { MapScreen, SearchScreen } from "./src/screens";
 
+
 const Tab = createBottomTabNavigator();
 
 const routeIcons = {
+
   Map: "map-pin",
   Search: "search",
+
 };
 
 export default function App() {
   return (
+
     <NavigationContainer style={styles.container}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -24,6 +29,7 @@ export default function App() {
               name={routeIcons[route.name]}
               size={24}
               color={focused ? "blue" : "grey"}
+
             />
           ),
         })}
@@ -34,6 +40,7 @@ export default function App() {
       >
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Search" component={SearchScreen} />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
