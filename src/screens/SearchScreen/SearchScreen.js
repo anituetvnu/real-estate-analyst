@@ -182,7 +182,7 @@ const SearchScreen = () => {
         >
           <Text style={styles.selected}>{district}</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             setList(Array.from(subDistrict));
             setChoose("subDistrict");
@@ -190,7 +190,7 @@ const SearchScreen = () => {
           }}
         >
           <Text style={styles.selected}>{subDistrict}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <View>
