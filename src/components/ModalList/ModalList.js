@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,11 +6,47 @@ import {
   Modal,
   TouchableOpacity,
   ScrollView,
+  FlatList
 } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
+
+
 const History = (props) => {
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          switch (props.choose) {
+            case "district":
+              props.setDistrict(item.name);
+              break;
+            case "subDistrict":
+              props.setSubDistrict(item.name);
+              break;
+            case "bedroom":
+              props.setBedroom(item.name);
+              break;
+            case "bathroom":
+              props.setBathroom(item.name);
+              break;
+            case "toilet":
+              props.setToilet(item.name);
+              break;
+            default:
+              break;
+          }
+          console.log(item)
+          props.setVisible(false);
+        }}
+      >
+        <Text style={styles.choose}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <Modal
       visible={props.visible}
@@ -26,37 +62,11 @@ const History = (props) => {
           </TouchableOpacity>
           <Text style={styles.title}>CHỌN</Text>
         </View>
-        <ScrollView>
-          <View style={styles.content}>
-            {props.list.map((item) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    switch (props.choose) {
-                      case "district":
-                        props.setDistrict(item);
-                        break;
-                      case "bedroom":
-                        props.setBedroom(item);
-                        break;
-                      case "bathroom":
-                        props.setBathroom(item);
-                        break;
-                      case "toilet":
-                        props.setToilet(item);
-                        break;
-                      default:
-                        break;
-                    }
-                    props.setVisible(false);
-                  }}
-                >
-                  <Text style={styles.choose}>{item}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </ScrollView>
+        <FlatList
+          data={props.list}
+          renderItem={renderItem}
+          keyExtractor={item => String(item.id)}
+        />
       </View>
     </Modal>
   );
