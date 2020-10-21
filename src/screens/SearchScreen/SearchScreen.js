@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Picker } from "react-native";
 import styles from "./styles";
 import ModalList from "../../components/ModalList/ModalList";
+import ModalDirection from "../../components/ModalDirection/ModalDirection"
 
 const District = [
   {
@@ -149,17 +150,40 @@ const number = [
 ];
 
 const SearchScreen = () => {
+  // Quận,  số phòng ngủ,  số toilet,  hướng nhà,  hướng ban công, chủ dự án, tên dự án, diện tích
   const [district, setDistrict] = useState("Quận/Huyện");
+  // const [options, setOptions] = useState({
+  //   district: "",
+  //   bedroom: 0,
+  //   toilet: 0,
+  //   house_direction: "",
+  //   balcony_direction: "",
+  //   owner: "",
+  //   name: "",
+  //   acreage: 0,
+  // })
   const [subDistrict, setSubDistrict] = useState("Phường/Xã");
   const [bedroom, setBedroom] = useState(1);
   const [bathroom, setBathroom] = useState(1);
   const [toilet, setToilet] = useState(1);
   const [acreage, setAcreage] = useState(0);
   const [modalListVisible, setModalListVisible] = useState(false);
+  const [modalDirectionVisible, setModalDirectionVisible] = useState(false)
   const [list, setList] = useState(Array.from(District));
   const [choose, setChoose] = useState("district");
+  const [houseDirection, setHouseDirection] = useState("");
+  const [balconyDirection, setBalconyDirection] = useState("");
+  const [owner, setOwner] = useState("");
+  const [name, setName] = useState("");
   return (
     <View style={styles.container}>
+      <ModalDirection
+        visible={modalDirectionVisible}
+        setVisible={setModalDirectionVisible}
+        setHouseDirection={setHouseDirection}
+        setBalconyDirection={setBalconyDirection}
+        choose={choose}
+      />
       <ModalList
         visible={modalListVisible}
         list={list}
@@ -169,7 +193,9 @@ const SearchScreen = () => {
         setBedroom={setBedroom}
         setBathroom={setBathroom}
         setToilet={setToilet}
+        // setOptions={setOptions}
         choose={choose}
+      // options={options}
       />
       <View>
         <Text style={styles.text}>ĐỊA ĐIỂM</Text>
@@ -181,6 +207,24 @@ const SearchScreen = () => {
           }}
         >
           <Text style={styles.selected}>{district}</Text>
+        </TouchableOpacity>
+        <Text style={styles.text}>HƯỚNG NHÀ</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setChoose("houseDirection");
+            setModalDirectionVisible(!modalDirectionVisible);
+          }}
+        >
+          <Text style={styles.selected}>{houseDirection}</Text>
+        </TouchableOpacity>
+        <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setChoose("balconyDirection");
+            setModalDirectionVisible(!modalDirectionVisible);
+          }}
+        >
+          <Text style={styles.selected}>{balconyDirection}</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity
           onPress={() => {

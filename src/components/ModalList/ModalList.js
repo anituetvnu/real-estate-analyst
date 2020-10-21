@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Modal,
+  TouchableHighlight,
   TouchableOpacity,
   ScrollView,
   FlatList
@@ -13,7 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 
 
-const History = (props) => {
+const ModalList = (props) => {
 
   const renderItem = ({ item }) => {
     return (
@@ -72,4 +73,4 @@ const History = (props) => {
   );
 };
 
-export default History;
+export default ModalList;
