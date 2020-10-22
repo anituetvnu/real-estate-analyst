@@ -10,52 +10,58 @@ import {
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
-const arrow = require("../../../assets/arrow.png");
+// const arrow = require("../../../assets/arrow.png");
 
 const ModalDirection = (props) => {
   const [direct, setDirect] = useState("");
 
-  const handlePressEvent = (num) => {
-    switch (num) {
-      case 1:
-        props.setDirect("Tây Bắc");
-        break;
-      case 2:
-        setDirect("Bắc");
-        break;
-      case 3:
-        setDirect("Đông Bắc");
-        break;
-      case 4:
-        setDirect("Tây");
-        break;
-      case 6:
-        setDirect("Đông");
-        break;
-      case 7:
-        setDirect("Tây Nam");
-        break;
-      case 8:
-        setDirect("Nam");
-        break;
-      case 9:
-        setDirect("Đông Nam");
-        break;
-      default:
-        break;
-    }
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          switch (props.choose) {
+            case 1:
+              props.setDirect("Tây Bắc");
+              break;
+            case 2:
+              setDirect("Bắc");
+              break;
+            case 3:
+              setDirect("Đông Bắc");
+              break;
+            case 4:
+              setDirect("Tây");
+              break;
+            case 6:
+              setDirect("Đông");
+              break;
+            case 7:
+              setDirect("Tây Nam");
+              break;
+            case 8:
+              setDirect("Nam");
+              break;
+            case 9:
+              setDirect("Đông Nam");
+              break;
+            default:
+              break;
+          }
 
-    switch (props.choose) {
-      case "houseDirection":
-        props.setHouseDirection(direct);
-        break;
-      case "balconyDirection":
-        props.setBalconyDirection(direct);
-        break;
-      default:
-        break;
-    }
-    props.setVisible(false);
+          switch (props.choose) {
+            case "houseDirection":
+              props.setHouseDirection(direct);
+              break;
+            case "balconyDirection":
+              props.setBalconyDirection(direct);
+              break;
+            default:
+              break;
+          }
+          props.setVisible(false);
+        }}
+      ></TouchableOpacity>
+    );
   };
 
   return (
@@ -74,66 +80,14 @@ const ModalDirection = (props) => {
           <Text style={styles.title}>CHỌN</Text>
         </View>
         {/* <Text>{direct}</Text> */}
-        <View style={styles.arrowContainer}>
-          <View style={styles.row}>
-            <TouchableOpacity onPress={() => handlePressEvent(1)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "-135deg" }] }]}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handlePressEvent(2)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "-90deg" }] }]}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handlePressEvent(3)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "-45deg" }] }]}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity onPress={() => handlePressEvent(4)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "-180deg" }] }]}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handlePressEvent(6)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "0deg" }] }]}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity onPress={() => handlePressEvent(7)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "135deg" }] }]}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handlePressEvent(8)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "90deg" }] }]}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => handlePressEvent(9)}>
-              <Image
-                source={arrow}
-                style={[styles.arrow, { transform: [{ rotate: "45deg" }] }]}
-              />
-            </TouchableOpacity>
-          </View>
+      </View>
+      <View style={styles.arrowContainer}>
+        <View style={styles.row}>
+          <FlatList
+            data={props.list}
+            renderItem={renderItem}
+            keyExtractor={(item) => String(item.id)}
+          />
         </View>
       </View>
     </Modal>
