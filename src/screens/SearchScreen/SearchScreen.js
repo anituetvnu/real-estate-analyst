@@ -6,125 +6,126 @@ import ModalDirection from "../../components/ModalDirection/ModalDirection";
 
 const District = [
   {
-    name: 'Quận Ba Đình',
-    id: 0
+    name: "Quận Ba Đình",
+    id: 0,
   },
   {
-    name: 'Quận Hoàn Kiếm',
-    id: 1
+    name: "Quận Hoàn Kiếm",
+    id: 1,
   },
   {
-    name: 'Quận Tây Hồ',
-    id: 2
+    name: "Quận Tây Hồ",
+    id: 2,
   },
   {
-    name: 'Quận Long Biên',
-    id: 3
+    name: "Quận Long Biên",
+    id: 3,
   },
   {
-    name: 'Quận Cầu Giấy',
-    id: 4
+    name: "Quận Cầu Giấy",
+    id: 4,
   },
   {
-    name: 'Quận Đống Đa',
-    id: 5
+    name: "Quận Đống Đa",
+    id: 5,
   },
   {
-    name: 'Quận Hai Bà Trưng',
-    id: 6
+    name: "Quận Hai Bà Trưng",
+    id: 6,
   },
   {
-    name: 'Quận Hoàng Mai',
-    id: 7
+    name: "Quận Hoàng Mai",
+    id: 7,
   },
   {
-    name: 'Quận Thanh Xuân',
-    id: 8
+    name: "Quận Thanh Xuân",
+    id: 8,
   },
   {
-    name: 'Huyện Sóc Sơn',
-    id: 9
+    name: "Huyện Sóc Sơn",
+    id: 9,
   },
   {
-    name: 'Huyện Đông Anh',
-    id: 10
+    name: "Huyện Đông Anh",
+    id: 10,
   },
   {
-    name: 'Huyện Gia Lâm',
-    id: 11
+    name: "Huyện Gia Lâm",
+    id: 11,
   },
   {
-    name: 'Quận Nam Từ Liêm',
-    id: 12
+    name: "Quận Nam Từ Liêm",
+    id: 12,
   },
   {
-    name: 'Huyện Thanh Trì',
-    id: 13
+    name: "Huyện Thanh Trì",
+    id: 13,
   },
   {
-    name: 'Quận Bắc Từ Liêm',
-    id: 14
+    name: "Quận Bắc Từ Liêm",
+    id: 14,
   },
   {
-    name: 'Huyện Mê Linh',
-    id: 15
+    name: "Huyện Mê Linh",
+    id: 15,
   },
   {
-    name: 'Quận Hà Đông',
-    id: 16
+    name: "Quận Hà Đông",
+    id: 16,
   },
   {
-    name: 'Thị xã Sơn Tây',
-    id: 17
+    name: "Thị xã Sơn Tây",
+    id: 17,
   },
   {
-    name: 'Huyện Ba Vì',
-    id: 18
+    name: "Huyện Ba Vì",
+    id: 18,
   },
   {
-    name: 'Huyện Phúc Thọ',
-    id: 19
+    name: "Huyện Phúc Thọ",
+    id: 19,
   },
   {
-    name: 'Huyện Đan Phượng',
-    id: 20
+    name: "Huyện Đan Phượng",
+    id: 20,
   },
   {
-    name: 'Huyện Hoài Đức',
-    id: 21
+    name: "Huyện Hoài Đức",
+    id: 21,
   },
   {
-    name: 'Huyện Quốc Oai',
-    id: 22
+    name: "Huyện Quốc Oai",
+    id: 22,
   },
   {
-    name: 'Huyện Thạch Thất',
-    id: 23
+    name: "Huyện Thạch Thất",
+    id: 23,
   },
   {
-    name: 'Huyện Chương Mỹ',
-    id: 24
+    name: "Huyện Chương Mỹ",
+    id: 24,
   },
   {
-    name: 'Huyện Thanh Oai',
-    id: 25
+    name: "Huyện Thanh Oai",
+    id: 25,
   },
   {
-    name: 'Huyện Thường Tín',
-    id: 26
+    name: "Huyện Thường Tín",
+    id: 26,
   },
   {
-    name: 'Huyện Phú Xuyên',
-    id: 27
+    name: "Huyện Phú Xuyên",
+    id: 27,
   },
   {
-    name: 'Huyện Ứng Hòa',
-    id: 28
+    name: "Huyện Ứng Hòa",
+    id: 28,
   },
   {
-    name: 'Huyện Mỹ Đức',
-    id: 29
-  },]
+    name: "Huyện Mỹ Đức",
+    id: 29,
+  },
+];
 const subDistrict = {};
 const number = [
   {
@@ -157,14 +158,14 @@ const SearchScreen = () => {
   const [bathroom, setBathroom] = useState(1);
   const [toilet, setToilet] = useState(1);
   const [acreage, setAcreage] = useState(0);
-  const [houseDirection, setHouseDirection] = useState("");
-  const [balconyDirection, setBalconyDirection] = useState("");
+  const [houseDirection, setHouseDirection] = useState("Đông");
+  const [balconyDirection, setBalconyDirection] = useState("Đông");
   const [owner, setOwner] = useState("");
   const [name, setName] = useState("");
   const [modalListVisible, setModalListVisible] = useState(false);
   const [modalDirectionVisible, setModalDirectionVisible] = useState(false);
   const [list, setList] = useState(Array.from(District));
-  const [choose, setChoose] = useState("district");
+  const [choose, setChoose] = useState("");
   return (
     <View style={styles.container}>
       <ModalDirection
@@ -247,6 +248,7 @@ const SearchScreen = () => {
             setList(Array.from(number));
             setChoose("bedroom");
             setModalListVisible(!modalListVisible);
+            console.log(bedroom);
           }}
         >
           <Text style={styles.selected}>{bedroom}</Text>

@@ -6,15 +6,12 @@ import {
   Modal,
   TouchableOpacity,
   ScrollView,
-  FlatList
+  FlatList,
 } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
-
-
 const History = (props) => {
-
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -38,14 +35,13 @@ const History = (props) => {
             default:
               break;
           }
-          // console.log(item)
           props.setVisible(false);
         }}
       >
         <Text style={styles.choose}>{item.name}</Text>
       </TouchableOpacity>
     );
-  }
+  };
 
   return (
     <Modal
@@ -65,7 +61,7 @@ const History = (props) => {
         <FlatList
           data={props.list}
           renderItem={renderItem}
-          keyExtractor={item => String(item.id)}
+          keyExtractor={(item) => String(item.id)}
         />
       </View>
     </Modal>
