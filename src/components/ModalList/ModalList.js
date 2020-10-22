@@ -11,7 +11,7 @@ import {
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
-const History = (props) => {
+const ModalList = (props) => {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -19,6 +19,12 @@ const History = (props) => {
           switch (props.choose) {
             case "district":
               props.setDistrict(item.name);
+              break;
+            case "houseDirection":
+              props.setHouseDirection(item.name);
+              break;
+            case "balconyDirection":
+              props.setBalconyDirection(item.name);
               break;
             case "subDistrict":
               props.setSubDistrict(item.name);
@@ -68,4 +74,4 @@ const History = (props) => {
   );
 };
 
-export default History;
+export default ModalList;
