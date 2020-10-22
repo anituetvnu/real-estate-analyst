@@ -38,7 +38,7 @@ const History = (props) => {
             default:
               break;
           }
-          console.log(item)
+          // console.log(item)
           props.setVisible(false);
         }}
       >
