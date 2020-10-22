@@ -33,6 +33,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     textAlignVertical: "center",
   },
+  submitButton: {
+    alignSelf: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    padding: 5,
+    borderColor: "orange",
+    borderRadius: 10,
+  },
+  submitText: {
+    fontSize: 20,
+    textAlign: "center",
+  }
 });
 
 export default styles;

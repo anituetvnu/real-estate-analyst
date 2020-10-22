@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
     arrow: {
         width: WINDOW_WIDTH / 3,
         height: WINDOW_WIDTH / 3,
+        backgroundColor: "green"
         // transform: [{ rotate: '90deg' }],
-    }
+    },
 });
 
 export default styles;

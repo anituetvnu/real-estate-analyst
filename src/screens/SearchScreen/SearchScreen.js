@@ -157,8 +157,8 @@ const SearchScreen = () => {
   const [bathroom, setBathroom] = useState(1);
   const [toilet, setToilet] = useState(1);
   const [acreage, setAcreage] = useState(0);
-  const [houseDirection, setHouseDirection] = useState(0);
-  const [balconyDirection, setBalconyDirection] = useState(0);
+  const [houseDirection, setHouseDirection] = useState("");
+  const [balconyDirection, setBalconyDirection] = useState("");
   const [owner, setOwner] = useState("");
   const [name, setName] = useState("");
   const [modalListVisible, setModalListVisible] = useState(false);
@@ -196,6 +196,8 @@ const SearchScreen = () => {
         >
           <Text style={styles.selected}>{district}</Text>
         </TouchableOpacity>
+      </View>
+      <View>
         <Text style={styles.text}>HƯỚNG NHÀ</Text>
         <TouchableOpacity
           onPress={() => {
@@ -205,6 +207,8 @@ const SearchScreen = () => {
         >
           <Text style={styles.selected}>{houseDirection}</Text>
         </TouchableOpacity>
+      </View>
+      <View>
         <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
         <TouchableOpacity
           onPress={() => {
@@ -214,7 +218,10 @@ const SearchScreen = () => {
         >
           <Text style={styles.selected}>{balconyDirection}</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
+      </View>
+
+      {/* <View>
+        <TouchableOpacity
           onPress={() => {
             setList(Array.from(subDistrict));
             setChoose("subDistrict");
@@ -222,8 +229,8 @@ const SearchScreen = () => {
           }}
         >
           <Text style={styles.selected}>{subDistrict}</Text>
-        </TouchableOpacity> */}
-      </View>
+        </TouchableOpacity>
+      </View> */}
 
       <View>
         <Text style={styles.text}>DIỆN TÍCH</Text>
@@ -271,6 +278,9 @@ const SearchScreen = () => {
           <Text style={styles.selected}>{toilet}</Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity style={styles.submitButton}>
+        <Text style={styles.submitText}>DỰ ĐOÁN</Text>
+      </TouchableOpacity>
     </View>
   );
 };

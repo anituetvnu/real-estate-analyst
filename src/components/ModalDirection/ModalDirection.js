@@ -8,8 +8,9 @@ const arrow = require("../../../assets/arrow.png")
 const ModalDirection = (props) => {
     const [choose, setChoose] = useState(0);
     const [direct, setDirect] = useState("");
-    useEffect(() => {
-        switch (choose) {
+
+    const handlePressEvent = (num) => {
+        switch (num) {
             case 1:
                 setDirect("Tây Bắc")
                 break;
@@ -37,7 +38,20 @@ const ModalDirection = (props) => {
             default:
                 break;
         }
-    }, [choose])
+
+        switch (props.choose) {
+            case "houseDirection":
+                props.setHouseDirection(direct)
+                break;
+            case "balconyDirection":
+                props.setBalconyDirection(direct)
+                break;
+            default:
+                break;
+
+        }
+        // props.setVisible(false);
+    }
 
     return (
         <Modal
@@ -54,24 +68,24 @@ const ModalDirection = (props) => {
                     </TouchableOpacity>
                     <Text style={styles.title}>CHỌN</Text>
                 </View>
-                <Text>{direct}</Text>
+                {/* <Text>{direct}</Text> */}
                 <View style={styles.arrowContainer}>
                     <View style={styles.row}>
-                        <TouchableOpacity onPress={() => setChoose(1)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(1)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '-135deg' }] }]}
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setChoose(2)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(2)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '-90deg' }] }]}
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setChoose(3)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(3)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '-45deg' }] }]}
@@ -79,14 +93,14 @@ const ModalDirection = (props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.row}>
-                        <TouchableOpacity onPress={() => setChoose(4)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(4)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '-180deg' }] }]}
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setChoose(6)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(6)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '0deg' }] }]}
@@ -94,21 +108,21 @@ const ModalDirection = (props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.row}>
-                        <TouchableOpacity onPress={() => setChoose(7)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(7)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '135deg' }] }]}
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setChoose(8)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(8)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '90deg' }] }]}
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setChoose(9)}>
+                        <TouchableOpacity onPress={() => handlePressEvent(9)}>
                             <Image
                                 source={arrow}
                                 style={[styles.arrow, { transform: [{ rotate: '45deg' }] }]}
