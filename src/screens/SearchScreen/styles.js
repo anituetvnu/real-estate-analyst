@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
+import { Dimensions } from 'react-native';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -33,6 +36,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     textAlignVertical: "center",
   },
+  submitButton: {
+    // alignSelf: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    padding: 5,
+    borderColor: "#ff6600",
+    borderRadius: 10,
+    backgroundColor: "#ff6600",
+    position: "absolute",
+    bottom: 0,
+    width: windowWidth - 36,
+  },
+  submitText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  }
 });
 
 export default styles;

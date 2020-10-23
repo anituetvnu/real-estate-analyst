@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Feather } from "@expo/vector-icons";
-import { MapScreen, SearchScreen } from "./src/screens";
+import { MapScreen, SearchScreen, ResultScreen } from "./src/screens";
 
 
 const Tab = createBottomTabNavigator();
@@ -40,7 +40,7 @@ export default function App() {
       >
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Search" component={SearchScreen} />
-
+        <Tab.Screen name="Result" component={ResultScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

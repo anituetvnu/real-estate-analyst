@@ -7,15 +7,12 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   ScrollView,
-  FlatList
+  FlatList,
 } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
-
-
 const ModalList = (props) => {
-
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -23,6 +20,12 @@ const ModalList = (props) => {
           switch (props.choose) {
             case "district":
               props.setDistrict(item.name);
+              break;
+            case "houseDirection":
+              props.setHouseDirection(item.name);
+              break;
+            case "balconyDirection":
+              props.setBalconyDirection(item.name);
               break;
             case "subDistrict":
               props.setSubDistrict(item.name);
@@ -39,14 +42,13 @@ const ModalList = (props) => {
             default:
               break;
           }
-          console.log(item)
           props.setVisible(false);
         }}
       >
         <Text style={styles.choose}>{item.name}</Text>
       </TouchableOpacity>
     );
-  }
+  };
 
   return (
     <Modal
@@ -66,7 +68,7 @@ const ModalList = (props) => {
         <FlatList
           data={props.list}
           renderItem={renderItem}
-          keyExtractor={item => String(item.id)}
+          keyExtractor={(item) => String(item.id)}
         />
       </View>
     </Modal>
