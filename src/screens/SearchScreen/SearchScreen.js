@@ -222,7 +222,9 @@ const SearchScreen = ({ navigation }) => {
     //     console.error(error);
     //   });
     try {
-      const response = await fetch(`https://api-real-estate-analyst.herokuapp.com/api-real-estate-analyst?apiKey=${API_KEY}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`);
+      const response = await fetch(
+        `https://api-real-estate-analyst.herokuapp.com/api-real-estate-analyst?apiKey=${API_KEY}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
+      );
       const jsonData = await response.text();
       navigation.navigate("Result", { jsonData: jsonData });
     } catch (error) {
@@ -230,7 +232,7 @@ const SearchScreen = ({ navigation }) => {
     }
     // const jsonData = await response.json();
     // return console.log(response);
-  }
+  };
   return (
     <View style={styles.container}>
       {/* <ModalDirection
@@ -252,7 +254,7 @@ const SearchScreen = ({ navigation }) => {
         setToilet={setToilet}
         // setOptions={setOptions}
         choose={choose}
-      // options={options}
+        // options={options}
       />
       <View>
         <Text style={styles.text}>ĐỊA ĐIỂM</Text>
@@ -277,7 +279,6 @@ const SearchScreen = ({ navigation }) => {
         >
           <Text style={styles.selected}>{houseDirection}</Text>
         </TouchableOpacity>
-
       </View>
       <View>
         <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
@@ -290,7 +291,6 @@ const SearchScreen = ({ navigation }) => {
         >
           <Text style={styles.selected}>{balconyDirection}</Text>
         </TouchableOpacity>
-
       </View>
 
       {/* <View>
