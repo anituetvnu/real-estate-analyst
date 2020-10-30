@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
+import React, { useState } from "react";
+import { View, TouchableOpacity, ImageBackground } from "react-native";
 import { Global_Results } from "../../../screens/SearchScreen/InputScreen/InputScreen";
 import { DataTable } from "react-native-paper";
 import styles from "./styles";
@@ -42,9 +37,7 @@ const HistoryScreen = ({ navigation }) => {
       toilet: 1,
     },
   ]);
-  //   useEffect(() => {
-  //     setResults(Global_Results);
-  //   }, [Global_Results]);
+
   return (
     <ImageBackground style={{ flex: 1 }} source={require("./SearchBG.png")}>
       <View style={styles.container}>
