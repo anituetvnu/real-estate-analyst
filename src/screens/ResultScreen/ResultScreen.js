@@ -1,17 +1,21 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import styles from "./styles";
+import React from "react";
+import DetailScreen from "./DetailScreen/DetailScreen";
+import HistoryScreen from "./HistoryScreen/HistoryScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-const ResultScreen = ({ navigation, route }) => {
-    return (
-        <View style={styles.container}>
-            {/* console.log(route.params?.jsonData) */}
-            {
-                console.log(typeof route.params?.jsonData)
-            }
-            <Text>{JSON.parse(route.params?.jsonData).content.money}</Text>
-        </View>
-    )
-}
+const Stack = createStackNavigator();
+const ResultScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName="HistoryScreen">
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="HistoryScreen"
+        component={HistoryScreen}
+      />
+      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+};
 
-export default ResultScreen
+export default ResultScreen;

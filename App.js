@@ -8,19 +8,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Feather } from "@expo/vector-icons";
 import { MapScreen, SearchScreen, ResultScreen } from "./src/screens";
 
-
 const Tab = createBottomTabNavigator();
+const results = [];
 
 const routeIcons = {
-
   Map: "map-pin",
   Search: "search",
-
+  Result: "clipboard",
 };
 
 export default function App() {
   return (
-
     <NavigationContainer style={styles.container}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -28,15 +26,15 @@ export default function App() {
             <Feather
               name={routeIcons[route.name]}
               size={24}
-              color={focused ? "blue" : "grey"}
-
+              color={focused ? "orange" : "grey"}
             />
           ),
         })}
         tabBarOptions={{
-          activeTintColor: "blue",
+          activeTintColor: "orange",
           inactiveTintColor: "grey",
         }}
+        initialRouteName="Search"
       >
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Search" component={SearchScreen} />
