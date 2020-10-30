@@ -28,7 +28,8 @@ const GuessScreen = ({ route }) => {
         <Text style={styles.text}>
           Nhà vệ sinh: {route.params?.result.toilet}
         </Text>
-        {/* <Text>Giá {route.params?.jsonData.content.money} VNĐ</Text> */}
+        <Text>Giá: ... VNĐ</Text>
+        {/* <Text>{route.params?.jsonData.content.money}</Text> */}
       </View>
     </ImageBackground>
   );
