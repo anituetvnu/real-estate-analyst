@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import {
-  StyleSheet,
   Text,
   View,
   Modal,
-  TouchableHighlight,
   TouchableOpacity,
-  ScrollView,
   FlatList,
+  ImageBackground,
 } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
@@ -51,27 +49,29 @@ const ModalList = (props) => {
   };
 
   return (
-    <Modal
-      visible={props.visible}
-      transparent={false}
-      animationType="fade"
-      propagateSwipe={true}
-      statusBarTranslucent={false}
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => props.setVisible(false)}>
-            <Ionicons name="ios-arrow-back" style={styles.backButton} />
-          </TouchableOpacity>
-          <Text style={styles.title}>CHỌN</Text>
+    <View style={styles.modalContainer}>
+      <Modal
+        visible={props.visible}
+        transparent={true}
+        animationType="fade"
+        propagateSwipe={true}
+        statusBarTranslucent={false}
+      >
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => props.setVisible(false)}>
+              <Ionicons name="ios-arrow-back" style={styles.backButton} />
+            </TouchableOpacity>
+            <Text style={styles.title}>{props.choose.toUpperCase()}</Text>
+          </View>
+          <FlatList
+            data={props.list}
+            renderItem={renderItem}
+            keyExtractor={(item) => String(item.id)}
+          />
         </View>
-        <FlatList
-          data={props.list}
-          renderItem={renderItem}
-          keyExtractor={(item) => String(item.id)}
-        />
-      </View>
-    </Modal>
+      </Modal>
+    </View>
   );
 };
 

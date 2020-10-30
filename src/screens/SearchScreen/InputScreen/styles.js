@@ -1,14 +1,18 @@
 import { StyleSheet } from "react-native";
-import { Dimensions } from 'react-native';
+import { Dimensions } from "react-native";
+import Constants from "expo-constants";
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     flexDirection: "column",
-    marginTop: 50,
     marginHorizontal: 18,
+    marginTop: Constants.statusBarHeight,
   },
   picker: {
     height: 50,
@@ -19,41 +23,44 @@ const styles = StyleSheet.create({
   inputAcreage: {
     height: 40,
     borderRadius: 10,
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical: 4,
+    borderColor: "orange",
+    borderWidth: 2,
+    marginBottom: 10,
     padding: 10,
   },
   text: {
     fontWeight: "bold",
+    marginLeft: 5,
+    fontSize: 18,
   },
   selected: {
     height: 40,
-    marginVertical: 4,
+    marginBottom: 10,
     padding: 10,
-    borderColor: "black",
+    borderColor: "orange",
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 2,
+    color: "black",
+    fontSize: 15,
     textAlignVertical: "center",
   },
   submitButton: {
-    // alignSelf: "center",
     justifyContent: "center",
     borderWidth: 1,
     padding: 5,
-    borderColor: "#ff6600",
     borderRadius: 10,
-    backgroundColor: "#ff6600",
     position: "absolute",
-    bottom: 0,
+    bottom: 10,
     width: windowWidth - 36,
+    borderColor: "orange",
+    backgroundColor: "orange",
   },
   submitText: {
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-  }
+  },
 });
 
 export default styles;
