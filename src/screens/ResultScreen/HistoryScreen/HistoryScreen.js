@@ -1,42 +1,43 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, ImageBackground } from "react-native";
-import { Global_Results } from "../../../screens/SearchScreen/InputScreen/InputScreen";
 import { DataTable } from "react-native-paper";
+import { useSelector } from "react-redux";
 import styles from "./styles";
 
 const HistoryScreen = ({ navigation }) => {
-  const [results, setResults] = useState([
-    {
-      id: 1,
-      district: 1,
-      houseDirection: 1,
-      balconyDirection: 1,
-      acreage: 1,
-      bedroom: 1,
-      bathroom: 1,
-      toilet: 1,
-    },
-    {
-      id: 2,
-      district: 1,
-      houseDirection: 1,
-      balconyDirection: 1,
-      acreage: 1,
-      bedroom: 1,
-      bathroom: 1,
-      toilet: 1,
-    },
-    {
-      id: 3,
-      district: 1,
-      houseDirection: 1,
-      balconyDirection: 1,
-      acreage: 1,
-      bedroom: 1,
-      bathroom: 1,
-      toilet: 1,
-    },
-  ]);
+  const results = useSelector((state) => state.results);
+  // const [results, setResults] = useState([
+  //   {
+  //     id: 1,
+  //     district: 1,
+  //     houseDirection: 1,
+  //     balconyDirection: 1,
+  //     acreage: 1,
+  //     bedroom: 1,
+  //     bathroom: 1,
+  //     toilet: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //     district: 1,
+  //     houseDirection: 1,
+  //     balconyDirection: 1,
+  //     acreage: 1,
+  //     bedroom: 1,
+  //     bathroom: 1,
+  //     toilet: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     district: 1,
+  //     houseDirection: 1,
+  //     balconyDirection: 1,
+  //     acreage: 1,
+  //     bedroom: 1,
+  //     bathroom: 1,
+  //     toilet: 1,
+  //   },
+  // ]);
 
   return (
     <ImageBackground style={{ flex: 1 }} source={require("./SearchBG.png")}>
@@ -48,7 +49,7 @@ const HistoryScreen = ({ navigation }) => {
             <DataTable.Title>Hướng nhà</DataTable.Title>
             <DataTable.Title numeric>Diện tích</DataTable.Title>
           </DataTable.Header>
-          {results.map((result) => {
+          {/* {results.map((result) => {
             return (
               <TouchableOpacity
                 onPress={() => {
@@ -72,7 +73,8 @@ const HistoryScreen = ({ navigation }) => {
                 </DataTable.Row>
               </TouchableOpacity>
             );
-          })}
+          })} */}
+          {console.log(results)}
           <DataTable.Pagination
             page={1}
             numberOfPages={3}

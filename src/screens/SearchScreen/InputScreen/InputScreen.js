@@ -9,10 +9,8 @@ import {
 import styles from "./styles";
 import ModalList from "../../../components/ModalList/ModalList";
 import { Direction, District, number } from "./data/data";
-import { createStore } from "redux";
-
-const Global_Results = [];
-// let store = createStore(Global_Results);
+import { useDispatch, useSelector } from "react-redux";
+import addResult from "../../../actions/results";
 
 const InputScreen = ({ navigation }) => {
   // Quận,  số phòng ngủ,  số toilet,  hướng nhà,  hướng ban công, chủ dự án, tên dự án, diện tích
@@ -34,6 +32,10 @@ const InputScreen = ({ navigation }) => {
   const [opacity, setOpacity] = useState(0.5);
   const [blue, setBlue] = useState(1);
 
+  // redux
+  const dispatch = useDispatch();
+  const results = useSelector((state) => state.results);
+
   const API_KEY = "da677dc0-d3a1-4087-8754-c374a029f5b4";
 
   const getResult = async () => {
@@ -43,13 +45,13 @@ const InputScreen = ({ navigation }) => {
       if (district[0] === "H") _district = district.substr(6);
       if (district[0] === "T") _district = district.substr(7);
 
-      // const response = await fetch(
-      //   `https://api-real-estate-analyst.herokuapp.com/api-real-estate-analyst?apiKey=${API_KEY}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
-      // );
-      // const jsonData = await response.text();
+      const response = await fetch(
+        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
+      );
+      const jsonData = await response.text();
 
-      var result = {
-        id: Global_Results.length,
+      const result = {
+        // id: results.length,
         district: district,
         houseDirection: houseDirection,
         balconyDirection: balconyDirection,
@@ -57,22 +59,25 @@ const InputScreen = ({ navigation }) => {
         bedroom: bedroom,
         bathroom: bathroom,
         toilet: toilet,
-        // money: jsonData.content.money,
+        money: JSON.parse(jsonData).content.money,
       };
-
-      Global_Results.push(result);
+      // const action = addResult({});
+      // dispatch(action);
       // console.log(jsonData);
-      // navigation.navigate("GuessScreen", { result: result,  jsonData: jsonData });
-      console.log(Global_Results);
-      navigation.navigate("GuessScreen", { result: result });
+      navigation.navigate("GuessScreen", {
+        result: result,
+      });
+      // console.log(results);
+      console.log(jsonData);
+      // navigation.navigate("GuessScreen", { result: result });
     } catch (error) {
-      console.log(error);
+      console.log("error: ", error);
     }
   };
   useEffect(() => {
     if (modalListVisible) {
       setBlue(0.2);
-      console.log(1);
+      // console.log(1);
     } else {
       setBlue(1);
     }
@@ -242,4 +247,3 @@ const InputScreen = ({ navigation }) => {
 };
 
 export default InputScreen;
-export { Global_Results };
