@@ -57,7 +57,7 @@ const InputScreen = ({ navigation }) => {
         bedroom: bedroom,
         bathroom: bathroom,
         toilet: toilet,
-        // money: jsonData.content.money,
+        money: jsonData.content.money,
       };
 
       Global_Results.push(result);

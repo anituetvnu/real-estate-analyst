@@ -1,12 +1,5 @@
-import React, { useEffect } from "react";
-import {
-  Text,
-  View,
-  Modal,
-  TouchableOpacity,
-  FlatList,
-  ImageBackground,
-} from "react-native";
+import React from "react";
+import { Text, View, Modal, TouchableOpacity, FlatList } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 

@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { MapScreen, SearchScreen, ResultScreen } from "./src/screens";
 // import { Provider } from "react-redux";
-import store from "./src/store";
+// import store from "./src/store";
 
 const Tab = createBottomTabNavigator();
 

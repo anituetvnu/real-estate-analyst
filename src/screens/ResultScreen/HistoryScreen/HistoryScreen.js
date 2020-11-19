@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, ImageBackground } from "react-native";
-import { Global_Results } from "../../../screens/SearchScreen/InputScreen/InputScreen";
+import Global_Results from "../../../screens/SearchScreen/InputScreen/InputScreen";
 import { DataTable } from "react-native-paper";
 import styles from "./styles";
 
@@ -38,6 +38,10 @@ const HistoryScreen = ({ navigation }) => {
     },
   ]);
 
+  // useEffect(() => {
+  //   setResults(Global_Results);
+  // }, []);
+
   return (
     <ImageBackground style={{ flex: 1 }} source={require("./SearchBG.png")}>
       <View style={styles.container}>
@@ -64,23 +68,23 @@ const HistoryScreen = ({ navigation }) => {
                   });
                 }}
               >
-                <DataTable.Row key={result.id}>
+                <DataTable.Rows>
                   <DataTable.Cell>{result.id}</DataTable.Cell>
                   <DataTable.Cell>{result.district}</DataTable.Cell>
                   <DataTable.Cell>{result.houseDirection}</DataTable.Cell>
                   <DataTable.Cell numeric>{result.acreage}</DataTable.Cell>
-                </DataTable.Row>
+                </DataTable.Rows>
               </TouchableOpacity>
             );
           })}
-          <DataTable.Pagination
+          {/* <DataTable.Pagination
             page={1}
             numberOfPages={3}
             onPageChange={(page) => {
               console.log(page);
             }}
             label="1-2 of 6"
-          />
+          /> */}
         </DataTable>
       </View>
     </ImageBackground>

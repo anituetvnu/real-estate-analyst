@@ -2,7 +2,6 @@ import React from "react";
 import DetailScreen from "./DetailScreen/DetailScreen";
 import HistoryScreen from "./HistoryScreen/HistoryScreen";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const ResultScreen = () => {
