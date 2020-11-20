@@ -64,6 +64,7 @@ const InputScreen = ({ navigation }) => {
         bathroom: bathroom,
         toilet: toilet,
         money: formatMoney,
+        // money: JSON.parse(jsonData).content.money,
       };
       // const action = addResult({});
       // dispatch(action);
