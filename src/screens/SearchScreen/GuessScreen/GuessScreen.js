@@ -28,8 +28,17 @@ const GuessScreen = ({ route }) => {
         <Text style={styles.text}>
           Nhà vệ sinh: {route.params?.result.toilet}
         </Text>
-        <Text>Giá: ... VNĐ</Text>
-        {/* <Text>{route.params?.jsonData.content.money}</Text> */}
+        {/* <Text>Giá: ... VNĐ</Text> */}
+
+        {/* <Text style={styles.text}>
+          Giá:{" "}
+          {new Intl.NumberFormat("vn-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(Math.round(route.params?.result.money * 1000000))}{" "}
+          VNĐ
+        </Text> */}
+        <Text style={styles.text}>Giá: {route.params?.result.money} VNĐ</Text>
       </View>
     </ImageBackground>
   );

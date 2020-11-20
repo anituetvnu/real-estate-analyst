@@ -18,7 +18,7 @@ const DetailScreen = ({ route }) => {
         <Text style={styles.text}>Số phòng ngủ: {route.params?.bedroom}</Text>
         <Text style={styles.text}>Số phòng tắm: {route.params?.bathroom}</Text>
         <Text style={styles.text}>Nhà vệ sinh: {route.params?.toilet}</Text>
-        {/* <Text>Giá {route.params?.jsonData.content.money} VNĐ</Text> */}
+        <Text style={styles.text}>Giá {route.params?.money} VNĐ</Text>
       </View>
     </ImageBackground>
   );
