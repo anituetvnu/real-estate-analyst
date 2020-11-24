@@ -38,9 +38,7 @@ const GuessScreen = ({ route }) => {
           }).format(Math.round(route.params?.result.money * 1000000))}{" "}
           VNĐ
         </Text> */}
-        <Text style={styles.text}>
-          Giá: {Math.round(route.params?.result.money * 1000000)} VNĐ
-        </Text>
+        <Text style={styles.text}>Giá: {route.params?.result.money} VNĐ</Text>
       </View>
     </ImageBackground>
   );
