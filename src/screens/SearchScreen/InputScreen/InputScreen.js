@@ -55,7 +55,7 @@ const InputScreen = ({ navigation }) => {
         JSON.parse(jsonData).content.money.toFixed().toString() + ".000.000";
 
       const result = {
-        id: History.length,
+        id: History.length + 1,
         district: district,
         houseDirection: houseDirection,
         balconyDirection: balconyDirection,
@@ -64,7 +64,6 @@ const InputScreen = ({ navigation }) => {
         bathroom: bathroom,
         toilet: toilet,
         money: formatMoney,
-        // money: JSON.parse(jsonData).content.money,
       };
       // const action = addResult({});
       // dispatch(action);
@@ -83,6 +82,7 @@ const InputScreen = ({ navigation }) => {
     }
   };
   useEffect(() => {
+    setBlue(1);
     if (modalListVisible) {
       setBlue(0.2);
     } else {
