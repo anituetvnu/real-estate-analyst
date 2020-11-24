@@ -49,11 +49,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     borderRadius: 10,
-    position: "absolute",
+    // position: "absolute",
     bottom: 10,
     width: windowWidth - 36,
     borderColor: "orange",
     backgroundColor: "orange",
+    marginTop: 10,
   },
   submitText: {
     fontSize: 20,

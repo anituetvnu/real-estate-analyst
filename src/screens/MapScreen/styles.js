@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
   },
   locateButton: {
-    fontSize: 26,
     color: "blue",
     backgroundColor: "white",
-    padding: 7,
-    borderRadius: 10,
+    padding: 10,
+    width: 51,
+    height: 51,
+    borderRadius: 100,
   },
 });
 
