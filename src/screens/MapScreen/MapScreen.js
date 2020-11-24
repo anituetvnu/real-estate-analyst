@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MapView from "react-native-maps";
-import { View } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import styles from "./styles";
 import * as Location from "expo-location";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const MapScreen = () => {
+  const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState(null);
+  const [marker, setMarker] = useState();
   const [errorMsg, setErrorMsg] = useState(null);
   useEffect(() => {
     (async () => {
@@ -16,6 +20,7 @@ const MapScreen = () => {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+      setLoading(false);
     })();
   }, []);
 
@@ -24,26 +29,51 @@ const MapScreen = () => {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-    // console.log(location);
+    // console.log(location.coords.latitude);
   }
+
+  const createMarker = (coordinate) => {
+    setMarker(coordinate);
+  };
+
+  if (loading)
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="orange" />
+      </View>
+    );
+
   return (
     <View style={styles.container}>
       <MapView
         style={styles.mapStyle}
         initialRegion={{
-          latitude: 21.037729,
-          longitude: 105.783598,
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
           latitudeDelta: 0.09,
           longitudeDelta: 0.0,
         }}
         onLongPress={(event) => {
-          // console.log(event.nativeEvent);
+          console.log(event.nativeEvent.coordinate);
+          createMarker(event.nativeEvent.coordinate);
         }}
       >
+        {marker ? (
+          <MapView.Marker
+            coordinate={{
+              latitude: marker.latitude,
+              longitude: marker.longitude,
+            }}
+            title={"Chọn vị trí"}
+            description={"description"}
+          />
+        ) : (
+          <></>
+        )}
         <MapView.Marker
           coordinate={{
-            latitude: 21.037729,
-            longitude: 105.783598,
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
           }}
           title={"title"}
           description={"description"}
@@ -52,10 +82,14 @@ const MapScreen = () => {
       <View
         style={{
           position: "absolute", //use absolute position to show button on top of the map
-          top: "80%", //for center align
-          alignSelf: "flex-end", //for align to right
+          top: "90%", //for center align
+          left: "80%",
         }}
-      ></View>
+      >
+        <TouchableOpacity style={styles.locateButton} onPress={() => {}}>
+          <Ionicons name="md-locate" size={32} color="black" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

@@ -267,15 +267,14 @@ const InputScreen = ({ navigation }) => {
           >
             * Hãy điền đầy đủ thông tin
           </Text>
+          <TouchableOpacity
+            disabled={disable}
+            style={[styles.submitButton, { opacity: opacity }]}
+            onPress={() => getResult()}
+          >
+            <Text style={styles.submitText}>DỰ ĐOÁN</Text>
+          </TouchableOpacity>
         </ScrollView>
-
-        <TouchableOpacity
-          disabled={disable}
-          style={[styles.submitButton, { opacity: opacity }]}
-          onPress={() => getResult()}
-        >
-          <Text style={styles.submitText}>DỰ ĐOÁN</Text>
-        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
