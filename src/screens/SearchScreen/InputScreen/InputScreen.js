@@ -13,6 +13,8 @@ import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
 import addResult from "../../../actions/results";
 
+const History = [];
+
 const InputScreen = ({ navigation }) => {
   // Quận,  số phòng ngủ,  số toilet,  hướng nhà,  hướng ban công, chủ dự án, tên dự án, diện tích
   const [district, setDistrict] = useState("");
@@ -52,9 +54,11 @@ const InputScreen = ({ navigation }) => {
         `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
       );
       const jsonData = await response.text();
+      const formatMoney =
+        JSON.parse(jsonData).content.money.toFixed().toString() + ".000.000";
 
       const result = {
-        // id: results.length,
+        id: History.length + 1,
         district: district,
         houseDirection: houseDirection,
         balconyDirection: balconyDirection,
@@ -62,11 +66,14 @@ const InputScreen = ({ navigation }) => {
         bedroom: bedroom,
         bathroom: bathroom,
         toilet: toilet,
-        money: JSON.parse(jsonData).content.money,
+        money: formatMoney,
       };
       // const action = addResult({});
       // dispatch(action);
+      // console.log(results);
       // console.log(jsonData);
+      History.push(result);
+      console.log(History);
       navigation.navigate("GuessScreen", {
         result: result,
       });
@@ -78,9 +85,9 @@ const InputScreen = ({ navigation }) => {
     }
   };
   useEffect(() => {
+    setBlue(1);
     if (modalListVisible) {
       setBlue(0.2);
-      // console.log(1);
     } else {
       setBlue(1);
     }
@@ -282,3 +289,4 @@ const InputScreen = ({ navigation }) => {
 };
 
 export default InputScreen;
+export { History };
