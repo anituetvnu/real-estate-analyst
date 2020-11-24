@@ -179,6 +179,10 @@ const number = [
 
 const Furniture = [
   {
+    name: "",
+    id: 0,
+  },
+  {
     name: "cơ bản",
     id: 1,
   },
@@ -193,6 +197,10 @@ const Furniture = [
 ];
 
 const law_doc = [
+  {
+    name: "",
+    id: 0,
+  },
   {
     name: "có sổ",
     id: 1,

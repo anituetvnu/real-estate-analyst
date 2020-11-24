@@ -31,7 +31,7 @@ const ModalList = (props) => {
               props.setToilet(item.name);
               break;
             case "furniture":
-              props.setFurniture(item.id);
+              props.setFurniture(item.name);
               break;
             case "law":
               props.setLaw(item.name);
