@@ -5,10 +5,11 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import styles from "./styles";
 import ModalList from "../../../components/ModalList/ModalList";
-import { Direction, District, number } from "./data/data";
+import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
 import addResult from "../../../actions/results";
 
@@ -22,8 +23,11 @@ const InputScreen = ({ navigation }) => {
   const [bedroom, setBedroom] = useState("");
   const [bathroom, setBathroom] = useState("");
   const [toilet, setToilet] = useState("");
+  const [furniture, setFurniture] = useState("");
+  const [law, setLaw] = useState("");
   const [owner, setOwner] = useState("");
   const [name, setName] = useState("");
+
   const [modalListVisible, setModalListVisible] = useState(false);
   const [list, setList] = useState(Array.from(District));
   const [choose, setChoose] = useState("");
@@ -44,7 +48,6 @@ const InputScreen = ({ navigation }) => {
       if (district[0] === "Q") _district = district.substr(5);
       if (district[0] === "H") _district = district.substr(6);
       if (district[0] === "T") _district = district.substr(7);
-
       const response = await fetch(
         `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
       );
@@ -126,104 +129,146 @@ const InputScreen = ({ navigation }) => {
           setBedroom={setBedroom}
           setBathroom={setBathroom}
           setToilet={setToilet}
+          setFurniture={setFurniture}
+          setLaw={setLaw}
           choose={choose}
         />
-        <View>
-          <Text style={styles.text}>ĐỊA ĐIỂM</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(District));
-              setChoose("district");
-              setModalListVisible(!modalListVisible);
-            }}
-          >
-            <Text style={styles.selected}>{district}</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text style={styles.text}>HƯỚNG NHÀ</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(Direction));
-              setChoose("houseDirection");
-              setModalListVisible(!modalListVisible);
-            }}
-          >
-            <Text style={styles.selected}>{houseDirection}</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(Direction));
-              setChoose("balconyDirection");
-              setModalListVisible(!modalListVisible);
-            }}
-          >
-            <Text style={styles.selected}>{balconyDirection}</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView>
+          <View>
+            <Text style={styles.text}>ĐỊA ĐIỂM</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(District));
+                setChoose("district");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{district}</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={styles.text}>HƯỚNG NHÀ</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(Direction));
+                setChoose("houseDirection");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{houseDirection}</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(Direction));
+                setChoose("balconyDirection");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{balconyDirection}</Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* <View>
-        <TouchableOpacity
-          onPress={() => {
-            setList(Array.from(subDistrict));
-            setChoose("subDistrict");
-            setModalListVisible(!modalListVisible);
-          }}
-        >
-          <Text style={styles.selected}>{subDistrict}</Text>
-        </TouchableOpacity>
-      </View> */}
+          <View>
+            <Text style={styles.text}>DIỆN TÍCH</Text>
+            <TextInput
+              placeholder="m2"
+              style={styles.inputAcreage}
+              keyboardType="number-pad"
+              onChangeText={(value) => setAcreage(value)}
+            />
+          </View>
+          <View>
+            <Text style={styles.text}>PHÒNG NGỦ</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(number));
+                setChoose("bedroom");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{bedroom}</Text>
+            </TouchableOpacity>
+          </View>
 
-        <View>
-          <Text style={styles.text}>DIỆN TÍCH</Text>
-          <TextInput
-            placeholder="m2"
-            style={styles.inputAcreage}
-            keyboardType="number-pad"
-            onChangeText={(value) => setAcreage(value)}
-          />
-        </View>
-        <View>
-          <Text style={styles.text}>PHÒNG NGỦ</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(number));
-              setChoose("bedroom");
-              setModalListVisible(!modalListVisible);
+          <View>
+            <Text style={styles.text}>PHÒNG TẮM</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(number));
+                setChoose("bathroom");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{bathroom}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <Text style={styles.text}>NHÀ VỆ SINH</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(number));
+                setChoose("toilet");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{toilet}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <Text style={styles.text}>PHÁP LÝ</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(law_doc));
+                setChoose("law");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{law}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <Text style={styles.text}>NỘI THẤT</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setList(Array.from(Furniture));
+                setChoose("furniture");
+                setModalListVisible(!modalListVisible);
+              }}
+            >
+              <Text style={styles.selected}>{furniture}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <Text style={styles.text}>VỊ TRÍ</Text>
+            <TouchableOpacity
+            // onPress={() => {
+            //   setList(Array.from(number));
+            //   setChoose("toilet");
+            //   setModalListVisible(!modalListVisible);
+            // }}
+            >
+              <Text style={styles.selected}>{toilet}</Text>
+            </TouchableOpacity>
+          </View>
+          <Text
+            style={{
+              color: "red",
+              fontStyle: "italic",
+              marginLeft: 5,
+              marginBottom: 5,
             }}
           >
-            <Text style={styles.selected}>{bedroom}</Text>
-          </TouchableOpacity>
-        </View>
+            * Hãy điền đầy đủ thông tin
+          </Text>
+        </ScrollView>
 
-        <View>
-          <Text style={styles.text}>PHÒNG TẮM</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(number));
-              setChoose("bathroom");
-              setModalListVisible(!modalListVisible);
-            }}
-          >
-            <Text style={styles.selected}>{bathroom}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View>
-          <Text style={styles.text}>NHÀ VỆ SINH</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setList(Array.from(number));
-              setChoose("toilet");
-              setModalListVisible(!modalListVisible);
-            }}
-          >
-            <Text style={styles.selected}>{toilet}</Text>
-          </TouchableOpacity>
-        </View>
         <TouchableOpacity
           disabled={disable}
           style={[styles.submitButton, { opacity: opacity }]}
@@ -231,16 +276,6 @@ const InputScreen = ({ navigation }) => {
         >
           <Text style={styles.submitText}>DỰ ĐOÁN</Text>
         </TouchableOpacity>
-        <Text
-          style={{
-            color: "red",
-            fontStyle: "italic",
-            marginLeft: 5,
-            marginBottom: 5,
-          }}
-        >
-          * Hãy điền đầy đủ thông tin
-        </Text>
       </View>
     </ImageBackground>
   );

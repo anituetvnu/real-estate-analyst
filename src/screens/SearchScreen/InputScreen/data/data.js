@@ -177,4 +177,30 @@ const number = [
   },
 ];
 
-export { Direction, District, number };
+const Furniture = [
+  {
+    name: "cơ bản",
+    id: 1,
+  },
+  {
+    name: "đầy đủ",
+    id: 2,
+  },
+  {
+    name: "cao cấp",
+    id: 3,
+  },
+];
+
+const law_doc = [
+  {
+    name: "có sổ",
+    id: 1,
+  },
+  {
+    name: "hợp đồng mua bán",
+    id: 2,
+  },
+];
+
+export { Direction, District, number, Furniture, law_doc };
