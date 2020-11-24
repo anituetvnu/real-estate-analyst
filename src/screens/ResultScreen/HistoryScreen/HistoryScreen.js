@@ -34,8 +34,8 @@ const HistoryScreen = ({ navigation, route }) => {
           <DataTable>
             <DataTable.Header>
               <DataTable.Title>ID</DataTable.Title>
-              <DataTable.Title>Hướng nhà</DataTable.Title>
-              <DataTable.Title numeric>Diện tích</DataTable.Title>
+              <DataTable.Title>Địa điểm</DataTable.Title>
+              <DataTable.Title numeric>Diện tích (m2)</DataTable.Title>
             </DataTable.Header>
             {histories.map((result) => {
               return (
@@ -48,13 +48,14 @@ const HistoryScreen = ({ navigation, route }) => {
                       balconyDirection: result.balconyDirection,
                       acreage: result.acreage,
                       bedroom: result.bedroom,
-                      bathroom: result.bathroom,
                       toilet: result.toilet,
+                      furniture: result.furniture,
+                      law: result.law,
                       money: result.money,
                     });
                   }}
                 >
-                  <DataTable.Row key={result.id}>
+                  <DataTable.Row key={result.district}>
                     <DataTable.Cell>{result.id}</DataTable.Cell>
                     <DataTable.Cell>{result.district}</DataTable.Cell>
                     <DataTable.Cell numeric>{result.acreage}</DataTable.Cell>

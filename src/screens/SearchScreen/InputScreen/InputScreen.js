@@ -23,7 +23,6 @@ const InputScreen = ({ navigation }) => {
   const [balconyDirection, setBalconyDirection] = useState("");
   const [acreage, setAcreage] = useState();
   const [bedroom, setBedroom] = useState("");
-  const [bathroom, setBathroom] = useState("");
   const [toilet, setToilet] = useState("");
   const [furniture, setFurniture] = useState("");
   const [law, setLaw] = useState("");
@@ -51,7 +50,7 @@ const InputScreen = ({ navigation }) => {
       if (district[0] === "H") _district = district.substr(6);
       if (district[0] === "T") _district = district.substr(7);
       const response = await fetch(
-        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&bathroom=${bathroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
+        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
       );
       const jsonData = await response.text();
       const formatMoney =
@@ -64,8 +63,9 @@ const InputScreen = ({ navigation }) => {
         balconyDirection: balconyDirection,
         acreage: acreage,
         bedroom: bedroom,
-        bathroom: bathroom,
         toilet: toilet,
+        furniture: furniture,
+        law: law,
         money: formatMoney,
       };
       // const action = addResult({});
@@ -98,7 +98,6 @@ const InputScreen = ({ navigation }) => {
       houseDirection &&
       balconyDirection &&
       bedroom &&
-      bathroom &&
       toilet &&
       acreage
     ) {
@@ -108,15 +107,7 @@ const InputScreen = ({ navigation }) => {
       setDisable(true);
       setOpacity(0.5);
     }
-  }, [
-    district,
-    houseDirection,
-    balconyDirection,
-    acreage,
-    bedroom,
-    bathroom,
-    toilet,
-  ]);
+  }, [district, houseDirection, balconyDirection, acreage, bedroom, toilet]);
 
   return (
     <ImageBackground
@@ -133,96 +124,96 @@ const InputScreen = ({ navigation }) => {
           setHouseDirection={setHouseDirection}
           setBalconyDirection={setBalconyDirection}
           setBedroom={setBedroom}
-          setBathroom={setBathroom}
           setToilet={setToilet}
           setFurniture={setFurniture}
           setLaw={setLaw}
           choose={choose}
         />
         <ScrollView>
-          <View>
-            <Text style={styles.text}>ĐỊA ĐIỂM</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(District));
-                setChoose("district");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{district}</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Text style={styles.text}>HƯỚNG NHÀ</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(Direction));
-                setChoose("houseDirection");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{houseDirection}</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Text style={styles.text}>HƯỚNG BAN CÔNG</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(Direction));
-                setChoose("balconyDirection");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{balconyDirection}</Text>
-            </TouchableOpacity>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View style={styles.spaceLeft}>
+              <Text style={styles.requiredText}>* ĐỊA ĐIỂM</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(District));
+                  setChoose("district");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{district}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.spaceRight}>
+              <Text style={styles.requiredText}>* DIỆN TÍCH</Text>
+              <TextInput
+                placeholder="m2"
+                style={styles.inputAcreage}
+                keyboardType="number-pad"
+                onChangeText={(value) => setAcreage(value)}
+              />
+            </View>
           </View>
 
-          <View>
-            <Text style={styles.text}>DIỆN TÍCH</Text>
-            <TextInput
-              placeholder="m2"
-              style={styles.inputAcreage}
-              keyboardType="number-pad"
-              onChangeText={(value) => setAcreage(value)}
-            />
-          </View>
-          <View>
-            <Text style={styles.text}>PHÒNG NGỦ</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(number));
-                setChoose("bedroom");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{bedroom}</Text>
-            </TouchableOpacity>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View style={styles.spaceLeft}>
+              <Text style={styles.requiredText}>* HƯỚNG NHÀ</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(Direction));
+                  setChoose("houseDirection");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{houseDirection}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.spaceRight}>
+              <Text style={styles.requiredText}>* HƯỚNG BAN CÔNG</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(Direction));
+                  setChoose("balconyDirection");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{balconyDirection}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
-          <View>
-            <Text style={styles.text}>PHÒNG TẮM</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(number));
-                setChoose("bathroom");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{bathroom}</Text>
-            </TouchableOpacity>
-          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View style={styles.spaceLeft}>
+              <Text style={styles.requiredText}>* PHÒNG NGỦ</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(number));
+                  setChoose("bedroom");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{bedroom}</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View>
-            <Text style={styles.text}>NHÀ VỆ SINH</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(number));
-                setChoose("toilet");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected}>{toilet}</Text>
-            </TouchableOpacity>
+            <View style={styles.spaceRight}>
+              <Text style={styles.requiredText}>* NHÀ VỆ SINH</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(number));
+                  setChoose("toilet");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{toilet}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View>
@@ -267,11 +258,11 @@ const InputScreen = ({ navigation }) => {
             style={{
               color: "red",
               fontStyle: "italic",
-              marginLeft: 5,
-              marginBottom: 5,
+              fontSize: 15,
+              marginTop: 20,
             }}
           >
-            * Hãy điền đầy đủ thông tin
+            * Thông tin bắt buộc
           </Text>
           <TouchableOpacity
             disabled={disable}
