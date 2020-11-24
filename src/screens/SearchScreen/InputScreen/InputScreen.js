@@ -82,7 +82,6 @@ const InputScreen = ({ navigation }) => {
     }
   };
   useEffect(() => {
-    setBlue(1);
     if (modalListVisible) {
       setBlue(0.2);
     } else {
