@@ -55,7 +55,7 @@ const HistoryScreen = ({ navigation, route }) => {
                     });
                   }}
                 >
-                  <DataTable.Row key={result.district}>
+                  <DataTable.Row key={result.id}>
                     <DataTable.Cell>{result.id}</DataTable.Cell>
                     <DataTable.Cell>{result.district}</DataTable.Cell>
                     <DataTable.Cell numeric>{result.acreage}</DataTable.Cell>

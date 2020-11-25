@@ -15,7 +15,7 @@ import addResult from "../../../actions/results";
 
 const History = [];
 
-const InputScreen = ({ navigation }) => {
+const InputScreen = ({ navigation, route }) => {
   // Quận,  số phòng ngủ,  số toilet,  hướng nhà,  hướng ban công, chủ dự án, tên dự án, diện tích
   const [district, setDistrict] = useState("");
   const [subDistrict, setSubDistrict] = useState("");
@@ -26,8 +26,6 @@ const InputScreen = ({ navigation }) => {
   const [toilet, setToilet] = useState("");
   const [furniture, setFurniture] = useState("");
   const [law, setLaw] = useState("");
-  const [owner, setOwner] = useState("");
-  const [name, setName] = useState("");
 
   const [modalListVisible, setModalListVisible] = useState(false);
   const [list, setList] = useState(Array.from(District));
@@ -40,7 +38,8 @@ const InputScreen = ({ navigation }) => {
   // redux
   const dispatch = useDispatch();
   const results = useSelector((state) => state.results);
-
+  const location = useSelector((state) => state.location);
+  console.log(" location", location);
   const API_KEY = "da677dc0-d3a1-4087-8754-c374a029f5b4";
 
   const getResult = async () => {
@@ -50,7 +49,7 @@ const InputScreen = ({ navigation }) => {
       if (district[0] === "H") _district = district.substr(6);
       if (district[0] === "T") _district = district.substr(7);
       const response = await fetch(
-        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}`
+        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&toilet=${toilet}&square=${acreage}&houseDirection=${houseDirection}&law=${law_doc}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
       );
       const jsonData = await response.text();
       const formatMoney =
@@ -245,13 +244,19 @@ const InputScreen = ({ navigation }) => {
           <View>
             <Text style={styles.text}>VỊ TRÍ</Text>
             <TouchableOpacity
-            // onPress={() => {
-            //   setList(Array.from(number));
-            //   setChoose("toilet");
-            //   setModalListVisible(!modalListVisible);
-            // }}
+              onPress={() => {
+                navigation.navigate("Map");
+              }}
             >
-              <Text style={styles.selected}>{toilet}</Text>
+              {location !== {} ? (
+                <Text style={styles.selected}>
+                  {location?.longitude.toFixed(3)}
+                  {"  "}
+                  {location?.latitude.toFixed(3)}
+                </Text>
+              ) : (
+                <Text style={styles.selected}></Text>
+              )}
             </TouchableOpacity>
           </View>
           <Text
