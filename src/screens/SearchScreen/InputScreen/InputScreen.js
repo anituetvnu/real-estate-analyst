@@ -244,13 +244,7 @@ const InputScreen = ({ navigation }) => {
 
           <View>
             <Text style={styles.text}>VỊ TRÍ</Text>
-            <TouchableOpacity
-            // onPress={() => {
-            //   setList(Array.from(number));
-            //   setChoose("toilet");
-            //   setModalListVisible(!modalListVisible);
-            // }}
-            >
+            <TouchableOpacity>
               <Text style={styles.selected}>{toilet}</Text>
             </TouchableOpacity>
           </View>
