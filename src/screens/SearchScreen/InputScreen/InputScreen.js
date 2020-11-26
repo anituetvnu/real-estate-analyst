@@ -11,6 +11,7 @@ import styles from "./styles";
 import ModalList from "../../../components/ModalList/ModalList";
 import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
+import { MaterialIcons } from "@expo/vector-icons";
 import addResult from "../../../actions/results";
 
 const History = [];
@@ -237,7 +238,10 @@ const InputScreen = ({ navigation, route }) => {
                 setModalListVisible(!modalListVisible);
               }}
             >
-              <Text style={styles.selected}>{furniture}</Text>
+              <Text style={styles.selected}>
+                {furniture}
+                {/* <MaterialIcons name="delete" size={24} /> */}
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -249,7 +253,7 @@ const InputScreen = ({ navigation, route }) => {
                 navigation.navigate("Map");
               }}
             >
-              {location !== {} ? (
+              {location?.longitude ? (
                 <Text style={styles.selected}>
                   {location?.longitude.toFixed(3)}
                   {"  "}
