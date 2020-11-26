@@ -243,6 +243,7 @@ const InputScreen = ({ navigation, route }) => {
 
           <View>
             <Text style={styles.text}>VỊ TRÍ</Text>
+
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("Map");
