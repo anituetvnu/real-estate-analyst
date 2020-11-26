@@ -34,7 +34,9 @@ const InputScreen = ({ navigation, route }) => {
 
   const [disable, setDisable] = useState(true);
   const [opacity, setOpacity] = useState(0.5);
-  const [blue, setBlue] = useState(1);
+  const [blue, setBlue] = useState(0.5);
+  const [hideFur, setHideFur] = useState(0);
+  const [hideLaw, setHideLaw] = useState(0);
 
   // redux
   const dispatch = useDispatch();
@@ -91,6 +93,21 @@ const InputScreen = ({ navigation, route }) => {
       setBlue(1);
     }
   }, [modalListVisible]);
+  useEffect(() => {
+    if (furniture) {
+      setHideFur(1);
+    } else {
+      setHideFur(0);
+    }
+  }, [furniture]);
+
+  useEffect(() => {
+    if (law) {
+      setHideLaw(1);
+    } else {
+      setHideLaw(0);
+    }
+  }, [law]);
 
   useEffect(() => {
     if (
@@ -217,7 +234,19 @@ const InputScreen = ({ navigation, route }) => {
           </View>
 
           <View>
-            <Text style={styles.text}>PHÁP LÝ</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.text}>PHÁP LÝ</Text>
+              <TouchableOpacity onPress={() => setLaw("")}>
+                <MaterialIcons
+                  name="delete"
+                  size={24}
+                  color="black"
+                  style={{ opacity: hideLaw }}
+                />
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               onPress={() => {
                 setList(Array.from(law_doc));
@@ -230,7 +259,19 @@ const InputScreen = ({ navigation, route }) => {
           </View>
 
           <View>
-            <Text style={styles.text}>NỘI THẤT</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.text}>NỘI THẤT</Text>
+              <TouchableOpacity onPress={() => setFurniture("")}>
+                <MaterialIcons
+                  name="delete"
+                  size={24}
+                  color="black"
+                  style={{ opacity: hideFur }}
+                />
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               onPress={() => {
                 setList(Array.from(Furniture));
@@ -238,10 +279,7 @@ const InputScreen = ({ navigation, route }) => {
                 setModalListVisible(!modalListVisible);
               }}
             >
-              <Text style={styles.selected}>
-                {furniture}
-                {/* <MaterialIcons name="delete" size={24} /> */}
-              </Text>
+              <Text style={styles.selected2}>{furniture}</Text>
             </TouchableOpacity>
           </View>
 

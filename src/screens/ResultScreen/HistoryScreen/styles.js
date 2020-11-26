@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-const a = 3;
+const a = 2.5;
 
 const styles = StyleSheet.create({
   container: {
