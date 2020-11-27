@@ -38,6 +38,7 @@ const InputScreen = ({ navigation, route }) => {
   const [hideFur, setHideFur] = useState(0);
   const [hideLaw, setHideLaw] = useState(0);
 
+  const [formatMoney, setFormatMoney] = useState();
   // redux
   const dispatch = useDispatch();
   const results = useSelector((state) => state.results);
@@ -52,11 +53,18 @@ const InputScreen = ({ navigation, route }) => {
       if (district[0] === "H") _district = district.substr(6);
       if (district[0] === "T") _district = district.substr(7);
       const response = await fetch(
-        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${district}&bedroom=${bedroom}&toilet=${toilet}&square=${acreage}&houseDirection=${houseDirection}&law=${law_doc}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
+        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${_district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}&law=${law}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
       );
-      const jsonData = await response.text();
-      const formatMoney =
-        JSON.parse(jsonData).content.money.toFixed().toString() + ".000.000";
+      console.log(
+        `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${_district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}&law=${law}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
+      );
+      await response.text().then((response) => {
+        console.log("response ", response);
+        console.log("type :", typeof response);
+        setFormatMoney(
+          JSON.parse(response).content.money.toFixed().toString() + ".000.000"
+        );
+      });
 
       const result = {
         id: History.length + 1,
@@ -80,7 +88,6 @@ const InputScreen = ({ navigation, route }) => {
         result: result,
       });
       // console.log(results);
-      console.log(jsonData);
       // navigation.navigate("GuessScreen", { result: result });
     } catch (error) {
       console.log("error: ", error);
