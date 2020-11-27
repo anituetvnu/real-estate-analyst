@@ -35,14 +35,16 @@ const InputScreen = ({ navigation, route }) => {
   const [disable, setDisable] = useState(true);
   const [opacity, setOpacity] = useState(0.5);
   const [blue, setBlue] = useState(0.5);
+
   const [hideFur, setHideFur] = useState(0);
   const [hideLaw, setHideLaw] = useState(0);
+  const [hideLoc, setHideLoc] = useState(0);
 
   // redux
   const dispatch = useDispatch();
   const results = useSelector((state) => state.results);
   const location = useSelector((state) => state.location);
-  console.log(" location", location);
+  // console.log(" location", location);
   const API_KEY = "da677dc0-d3a1-4087-8754-c374a029f5b4";
 
   const getResult = async () => {
@@ -100,7 +102,6 @@ const InputScreen = ({ navigation, route }) => {
       setHideFur(0);
     }
   }, [furniture]);
-
   useEffect(() => {
     if (law) {
       setHideLaw(1);
@@ -108,6 +109,13 @@ const InputScreen = ({ navigation, route }) => {
       setHideLaw(0);
     }
   }, [law]);
+  useEffect(() => {
+    if (location?.longitude || location?.longitude == 0) {
+      setHideLoc(1);
+    } else {
+      setHideLoc(0);
+    }
+  }, [location?.longitude]);
 
   useEffect(() => {
     if (
@@ -242,7 +250,7 @@ const InputScreen = ({ navigation, route }) => {
                 <MaterialIcons
                   name="delete"
                   size={24}
-                  color="black"
+                  color="blue"
                   style={{ opacity: hideLaw }}
                 />
               </TouchableOpacity>
@@ -254,7 +262,7 @@ const InputScreen = ({ navigation, route }) => {
                 setModalListVisible(!modalListVisible);
               }}
             >
-              <Text style={styles.selected}>{law}</Text>
+              <Text style={styles.selected2}>{law}</Text>
             </TouchableOpacity>
           </View>
 
@@ -267,7 +275,7 @@ const InputScreen = ({ navigation, route }) => {
                 <MaterialIcons
                   name="delete"
                   size={24}
-                  color="black"
+                  color="blue"
                   style={{ opacity: hideFur }}
                 />
               </TouchableOpacity>
@@ -298,7 +306,7 @@ const InputScreen = ({ navigation, route }) => {
                   {location?.latitude.toFixed(3)}
                 </Text>
               ) : (
-                <Text style={styles.selected}></Text>
+                <Text style={styles.selected2}></Text>
               )}
             </TouchableOpacity>
           </View>
