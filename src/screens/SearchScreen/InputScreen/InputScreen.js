@@ -252,7 +252,11 @@ const InputScreen = ({ navigation, route }) => {
                   setModalListVisible(!modalListVisible);
                 }}
               >
-                <Text style={styles.selected}>{bedroom}</Text>
+                {bedroom ? (
+                  <Text style={styles.selected}>{bedroom} phòng</Text>
+                ) : (
+                  <Text style={styles.selected}></Text>
+                )}
               </TouchableOpacity>
             </View>
 
@@ -265,7 +269,11 @@ const InputScreen = ({ navigation, route }) => {
                   setModalListVisible(!modalListVisible);
                 }}
               >
-                <Text style={styles.selected}>{toilet}</Text>
+                {toilet ? (
+                  <Text style={styles.selected}>{toilet} phòng</Text>
+                ) : (
+                  <Text style={styles.selected}></Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>
