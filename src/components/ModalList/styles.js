@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     marginTop: windowHeight * 0.1,
-    marginBottom: windowHeight * 0.2,
+    marginBottom: windowHeight * 0.3,
     marginHorizontal: windowWidth * 0.2,
     backgroundColor: "white",
     borderColor: "orange",

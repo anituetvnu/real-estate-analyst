@@ -52,7 +52,7 @@ const ModalList = (props) => {
       <Modal
         visible={props.visible}
         transparent={true}
-        animationType="fade"
+        animationType="slide"
         propagateSwipe={true}
         statusBarTranslucent={false}
       >
