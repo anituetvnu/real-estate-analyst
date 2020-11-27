@@ -66,33 +66,31 @@ const InputScreen = ({ navigation, route }) => {
       console.log(
         `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${_district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}&law=${law}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
       );
-      await response
-        .text()
-        .then((response) => {
-          console.log("response ", response);
-          console.log("type :", typeof response);
-          setFormatMoney(
+      await response.text().then((response) => {
+        console.log("response ", response);
+        console.log("type :", typeof response);
+        setFormatMoney(
+          (JSON.parse(response).content.money / acreage).toFixed().toString() +
+            ".000.000"
+        );
+        const result = {
+          id: results.length + 1,
+          district: district,
+          houseDirection: houseDirection,
+          balconyDirection: balconyDirection,
+          acreage: acreage,
+          bedroom: bedroom,
+          toilet: toilet,
+          furniture: furniture,
+          law: law,
+          money:
             (JSON.parse(response).content.money / acreage)
               .toFixed()
-              .toString() + ".000.000"
-          );
-        })
-        .then(() => {
-          const result = {
-            id: results.length + 1,
-            district: district,
-            houseDirection: houseDirection,
-            balconyDirection: balconyDirection,
-            acreage: acreage,
-            bedroom: bedroom,
-            toilet: toilet,
-            furniture: furniture,
-            law: law,
-            money: formatMoney,
-          };
-          const action = addResult(result);
-          dispatch(action);
-        });
+              .toString() + ".000.000",
+        };
+        const action = addResult(result);
+        dispatch(action);
+      });
       setLoading(false);
       setBlue(1);
 

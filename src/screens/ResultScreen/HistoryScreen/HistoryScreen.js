@@ -19,12 +19,12 @@ const HistoryScreen = ({ navigation, route }) => {
         <View style={styles.container}>
           <View style={styles.title}>
             <Text style={styles.titleText}>Lịch sử đã tìm kiếm</Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.reloadButton}
               onPress={() => setCheck(!check)}
             >
               <AntDesign name="reload1" size={24} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View style={styles.boxHistory}>
             <Text style={styles.boxIDTitle}>ID</Text>
