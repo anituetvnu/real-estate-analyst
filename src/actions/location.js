@@ -4,3 +4,9 @@ export const changeLocation = (obj) => {
     payload: obj,
   };
 };
+export const deleteLocation = (obj) => {
+  return {
+    type: "DELETE",
+    payload: obj,
+  };
+};

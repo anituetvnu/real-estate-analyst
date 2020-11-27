@@ -13,6 +13,7 @@ import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import addResult from "../../../actions/results";
+import { changeLocation } from "../../../actions/location";
 
 const History = [];
 
@@ -37,6 +38,7 @@ const InputScreen = ({ navigation, route }) => {
   const [blue, setBlue] = useState(0.5);
   const [hideFur, setHideFur] = useState(0);
   const [hideLaw, setHideLaw] = useState(0);
+  const [hideLoc, setHideLoc] = useState(0);
 
   const [formatMoney, setFormatMoney] = useState();
   // redux
@@ -115,6 +117,13 @@ const InputScreen = ({ navigation, route }) => {
       setHideLaw(0);
     }
   }, [law]);
+  useEffect(() => {
+    if (location?.longitude || location?.longitude == 0) {
+      setHideLoc(1);
+    } else {
+      setHideLoc(0);
+    }
+  }, [location?.longitude]);
 
   useEffect(() => {
     if (
@@ -291,7 +300,24 @@ const InputScreen = ({ navigation, route }) => {
           </View>
 
           <View>
-            <Text style={styles.text}>VỊ TRÍ</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.text}>VỊ TRÍ</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  const action = changeLocation({});
+                  dispatch(action);
+                }}
+              >
+                <MaterialIcons
+                  name="delete"
+                  size={24}
+                  color="black"
+                  style={{ opacity: hideLoc }}
+                />
+              </TouchableOpacity>
+            </View>
 
             <TouchableOpacity
               onPress={() => {
