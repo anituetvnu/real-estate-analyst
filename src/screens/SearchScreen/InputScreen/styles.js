@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     // padding: 10,
     textAlign: "center",
     fontWeight: "bold",
-    fontStyle: "italic",
     fontSize: 16,
+    color: "black",
   },
   text: {
     fontWeight: "bold",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
-    fontStyle: "italic",
+    color: "black",
   },
   selected2: {
     height: 40,
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
-    fontStyle: "italic",
   },
   submitButton: {
     paddingVertical: 5,
