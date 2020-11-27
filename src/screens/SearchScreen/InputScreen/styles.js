@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     top: 0.5 * windowHeight - 115,
-    left: 0.5 * windowWidth - 20,
+    left: 0.5 * windowWidth - 19,
   },
   container: {
     flex: 1,
