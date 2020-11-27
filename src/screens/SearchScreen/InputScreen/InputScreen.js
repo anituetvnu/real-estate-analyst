@@ -14,6 +14,7 @@ import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import addResult from "../../../actions/results";
+import { changeLocation } from "../../../actions/location";
 
 const History = [];
 
@@ -348,7 +349,24 @@ const InputScreen = ({ navigation, route }) => {
           </View>
 
           <View>
-            <Text style={styles.text}>VỊ TRÍ</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.text}>VỊ TRÍ</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  const action = changeLocation({});
+                  dispatch(action);
+                }}
+              >
+                <MaterialIcons
+                  name="delete"
+                  size={24}
+                  color="black"
+                  style={{ opacity: hideLoc }}
+                />
+              </TouchableOpacity>
+            </View>
 
             <TouchableOpacity
               onPress={() => {
