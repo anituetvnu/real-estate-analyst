@@ -13,8 +13,12 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     position: "absolute",
-    marginLeft: 0.23 * windowHeight,
-    marginTop: 0.35 * windowHeight,
+    // marginLeft: 0.23 * windowHeight,
+    // marginTop: 0.35 * windowHeight,
+    marginLeft: "auto",
+    marginRight: "auto",
+    top: 0.5 * windowHeight - 115,
+    left: 0.5 * windowWidth - 20,
   },
   container: {
     flex: 1,
@@ -84,6 +88,16 @@ const styles = StyleSheet.create({
   spaceRight: {
     flex: 1,
     marginLeft: 10,
+  },
+  result: {
+    marginTop: 40,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 30,
+    color: "white",
+    backgroundColor: "green",
+    borderRadius: 10,
+    padding: 50,
   },
 });
 

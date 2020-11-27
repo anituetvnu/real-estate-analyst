@@ -362,7 +362,7 @@ const InputScreen = ({ navigation, route }) => {
                 <MaterialIcons
                   name="delete"
                   size={24}
-                  color="black"
+                  color="blue"
                   style={{ opacity: hideLoc }}
                 />
               </TouchableOpacity>
@@ -392,9 +392,11 @@ const InputScreen = ({ navigation, route }) => {
           >
             <Text style={styles.submitText}>DỰ ĐOÁN</Text>
           </TouchableOpacity>
-          <View>
-            <Text>{formatMoney}</Text>
-          </View>
+          {formatMoney ? (
+            <Text style={styles.result}>{formatMoney} VNĐ</Text>
+          ) : (
+            <View></View>
+          )}
         </ScrollView>
       </View>
     </ImageBackground>
