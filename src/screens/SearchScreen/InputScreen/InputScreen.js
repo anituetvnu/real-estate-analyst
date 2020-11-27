@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./styles";
 import ModalList from "../../../components/ModalList/ModalList";
@@ -41,7 +42,10 @@ const InputScreen = ({ navigation, route }) => {
   const [hideLaw, setHideLaw] = useState(0);
   const [hideLoc, setHideLoc] = useState(0);
 
+  const [loading, setLoading] = useState(false);
+
   const [formatMoney, setFormatMoney] = useState();
+
   // redux
   const dispatch = useDispatch();
   const results = useSelector((state) => state.results);
@@ -51,6 +55,8 @@ const InputScreen = ({ navigation, route }) => {
 
   const getResult = async () => {
     try {
+      setLoading(true);
+      setBlue(0.2);
       let _district;
       if (district[0] === "Q") _district = district.substr(5);
       if (district[0] === "H") _district = district.substr(6);
@@ -65,9 +71,12 @@ const InputScreen = ({ navigation, route }) => {
         console.log("response ", response);
         console.log("type :", typeof response);
         setFormatMoney(
-          JSON.parse(response).content.money.toFixed().toString() + ".000.000"
+          (JSON.parse(response).content.money / acreage).toFixed().toString() +
+            ".000.000"
         );
       });
+      setLoading(false);
+      setBlue(1);
 
       const result = {
         id: History.length + 1,
@@ -87,15 +96,21 @@ const InputScreen = ({ navigation, route }) => {
       // console.log(jsonData);
       History.push(result);
       console.log(History);
-      navigation.navigate("GuessScreen", {
-        result: result,
-      });
+      // navigation.navigate("GuessScreen", {
+      //   result: result,
+      // });
       // console.log(results);
       // navigation.navigate("GuessScreen", { result: result });
     } catch (error) {
       console.log("error: ", error);
     }
   };
+
+  /*
+
+  Waiting...
+  
+  */
   useEffect(() => {
     if (modalListVisible) {
       setBlue(0.2);
@@ -124,7 +139,6 @@ const InputScreen = ({ navigation, route }) => {
       setHideLoc(0);
     }
   }, [location?.longitude]);
-
   useEffect(() => {
     if (
       district &&
@@ -147,6 +161,13 @@ const InputScreen = ({ navigation, route }) => {
       style={styles.background}
       source={require("./data/SearchBG.png")}
     >
+      {loading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="orange" />
+        </View>
+      ) : (
+        <View style={styles.loading}></View>
+      )}
       <View style={[styles.container, { opacity: blue }]}>
         <ModalList
           visible={modalListVisible}
@@ -220,7 +241,10 @@ const InputScreen = ({ navigation, route }) => {
           </View>
 
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
             <View style={styles.spaceLeft}>
               <Text style={styles.requiredText}>* PHÒNG NGỦ</Text>
@@ -248,55 +272,80 @@ const InputScreen = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Text
+            style={{
+              color: "red",
+              fontStyle: "italic",
+              fontSize: 15,
+              marginBottom: 20,
+            }}
+          >
+            * Thông tin bắt buộc
+          </Text>
 
-          <View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text style={styles.text}>PHÁP LÝ</Text>
-              <TouchableOpacity onPress={() => setLaw("")}>
-                <MaterialIcons
-                  name="delete"
-                  size={24}
-                  color="blue"
-                  style={{ opacity: hideLaw }}
-                />
+          {/* 
+
+            // NO REQUIRED
+
+        */}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View style={styles.spaceLeft}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.text}>PHÁP LÝ</Text>
+                <TouchableOpacity onPress={() => setLaw("")}>
+                  <MaterialIcons
+                    name="delete"
+                    size={24}
+                    color="blue"
+                    style={{ opacity: hideLaw }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(law_doc));
+                  setChoose("law");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{law}</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(law_doc));
-                setChoose("law");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected2}>{law}</Text>
-            </TouchableOpacity>
-          </View>
 
-          <View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text style={styles.text}>NỘI THẤT</Text>
-              <TouchableOpacity onPress={() => setFurniture("")}>
-                <MaterialIcons
-                  name="delete"
-                  size={24}
-                  color="blue"
-                  style={{ opacity: hideFur }}
-                />
+            <View style={styles.spaceRight}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.text}>NỘI THẤT</Text>
+                <TouchableOpacity onPress={() => setFurniture("")}>
+                  <MaterialIcons
+                    name="delete"
+                    size={24}
+                    color="blue"
+                    style={{ opacity: hideFur }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(Array.from(Furniture));
+                  setChoose("furniture");
+                  setModalListVisible(!modalListVisible);
+                }}
+              >
+                <Text style={styles.selected}>{furniture}</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                setList(Array.from(Furniture));
-                setChoose("furniture");
-                setModalListVisible(!modalListVisible);
-              }}
-            >
-              <Text style={styles.selected2}>{furniture}</Text>
-            </TouchableOpacity>
           </View>
 
           <View>
@@ -313,7 +362,7 @@ const InputScreen = ({ navigation, route }) => {
                 <MaterialIcons
                   name="delete"
                   size={24}
-                  color="black"
+                  color="blue"
                   style={{ opacity: hideLoc }}
                 />
               </TouchableOpacity>
@@ -331,20 +380,11 @@ const InputScreen = ({ navigation, route }) => {
                   {location?.latitude.toFixed(3)}
                 </Text>
               ) : (
-                <Text style={styles.selected2}></Text>
+                <Text style={styles.selected}></Text>
               )}
             </TouchableOpacity>
           </View>
-          <Text
-            style={{
-              color: "red",
-              fontStyle: "italic",
-              fontSize: 15,
-              marginTop: 20,
-            }}
-          >
-            * Thông tin bắt buộc
-          </Text>
+
           <TouchableOpacity
             disabled={disable}
             style={[styles.submitButton, { opacity: opacity }]}
@@ -352,6 +392,11 @@ const InputScreen = ({ navigation, route }) => {
           >
             <Text style={styles.submitText}>DỰ ĐOÁN</Text>
           </TouchableOpacity>
+          {formatMoney ? (
+            <Text style={styles.result}>{formatMoney} VNĐ</Text>
+          ) : (
+            <View></View>
+          )}
         </ScrollView>
       </View>
     </ImageBackground>

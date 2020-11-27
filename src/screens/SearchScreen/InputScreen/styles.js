@@ -4,9 +4,21 @@ import Constants from "expo-constants";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+const color = " rgb(224, 224, 224)";
 const styles = StyleSheet.create({
   background: {
     flex: 1,
+    position: "relative",
+  },
+  loading: {
+    flex: 1,
+    position: "absolute",
+    // marginLeft: 0.23 * windowHeight,
+    // marginTop: 0.35 * windowHeight,
+    marginLeft: "auto",
+    marginRight: "auto",
+    top: 0.5 * windowHeight - 115,
+    left: 0.5 * windowWidth - 20,
   },
   container: {
     flex: 1,
@@ -31,6 +43,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     color: "black",
+    backgroundColor: color,
   },
   text: {
     fontWeight: "bold",
@@ -52,25 +65,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
+    backgroundColor: color,
     color: "black",
-  },
-  selected2: {
-    height: 40,
-    marginBottom: 10,
-    padding: 10,
-    borderColor: "orange",
-    borderRadius: 10,
-    borderWidth: 2,
-    color: "black",
-    fontSize: 16,
-    textAlign: "center",
-    fontWeight: "bold",
   },
   submitButton: {
+    flex: 1,
     paddingVertical: 5,
     borderRadius: 10,
     backgroundColor: "orange",
-    marginTop: 10,
+    marginTop: 20,
   },
   submitText: {
     fontSize: 25,
@@ -85,6 +88,16 @@ const styles = StyleSheet.create({
   spaceRight: {
     flex: 1,
     marginLeft: 10,
+  },
+  result: {
+    marginTop: 40,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 30,
+    color: "white",
+    backgroundColor: "green",
+    borderRadius: 10,
+    padding: 50,
   },
 });
 

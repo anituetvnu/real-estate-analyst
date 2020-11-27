@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     marginTop: 50,
+    marginBottom: 50,
   },
   title: {
     flexDirection: "row",
