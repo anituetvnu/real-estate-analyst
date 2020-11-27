@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 16,
-    color: "green",
+    color: "black",
   },
   text: {
     fontWeight: "bold",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
-    color: "green",
+    color: "black",
   },
   selected2: {
     height: 40,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderColor: "orange",
     borderRadius: 10,
     borderWidth: 2,
-    color: "green",
+    color: "black",
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
