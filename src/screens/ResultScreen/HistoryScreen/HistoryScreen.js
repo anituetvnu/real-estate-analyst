@@ -32,7 +32,7 @@ const HistoryScreen = ({ navigation, route }) => {
             <Text style={styles.boxHouseTitle}>Hướng nhà</Text>
             <Text style={styles.boxAcreageTitle}>Diện tích </Text>
           </View>
-          {histories.map((result, index) => {
+          {results.map((result, index) => {
             return (
               <TouchableOpacity
                 style={styles.boxHistory}

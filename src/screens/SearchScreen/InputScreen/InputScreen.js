@@ -13,7 +13,7 @@ import ModalList from "../../../components/ModalList/ModalList";
 import { Direction, District, number, Furniture, law_doc } from "./data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
-import addResult from "../../../actions/results";
+import { addResult } from "../../../actions/results";
 import { changeLocation } from "../../../actions/location";
 
 const History = [];
@@ -50,7 +50,6 @@ const InputScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const results = useSelector((state) => state.results);
   const location = useSelector((state) => state.location);
-  // console.log(" location", location);
   const API_KEY = "da677dc0-d3a1-4087-8754-c374a029f5b4";
 
   const getResult = async () => {
@@ -67,40 +66,38 @@ const InputScreen = ({ navigation, route }) => {
       console.log(
         `http://18020105.pythonanywhere.com/api-real-estate-analyst?apiKey=${API_KEY}&district=${_district}&bedroom=${bedroom}&toilet=${toilet}&acreage=${acreage}&houseDirection=${houseDirection}&balconyDirection=${balconyDirection}&law=${law}&furniture=${furniture}&longitude=${location.longitude}&latitude=${location.latitude}`
       );
-      await response.text().then((response) => {
-        console.log("response ", response);
-        console.log("type :", typeof response);
-        setFormatMoney(
-          (JSON.parse(response).content.money / acreage).toFixed().toString() +
-            ".000.000"
-        );
-      });
+      await response
+        .text()
+        .then((response) => {
+          console.log("response ", response);
+          console.log("type :", typeof response);
+          setFormatMoney(
+            (JSON.parse(response).content.money / acreage)
+              .toFixed()
+              .toString() + ".000.000"
+          );
+        })
+        .then(() => {
+          const result = {
+            id: results.length + 1,
+            district: district,
+            houseDirection: houseDirection,
+            balconyDirection: balconyDirection,
+            acreage: acreage,
+            bedroom: bedroom,
+            toilet: toilet,
+            furniture: furniture,
+            law: law,
+            money: formatMoney,
+          };
+          const action = addResult(result);
+          dispatch(action);
+        });
       setLoading(false);
       setBlue(1);
 
-      const result = {
-        id: History.length + 1,
-        district: district,
-        houseDirection: houseDirection,
-        balconyDirection: balconyDirection,
-        acreage: acreage,
-        bedroom: bedroom,
-        toilet: toilet,
-        furniture: furniture,
-        law: law,
-        money: formatMoney,
-      };
-      // const action = addResult({});
-      // dispatch(action);
-      // console.log(results);
-      // console.log(jsonData);
-      History.push(result);
-      console.log(History);
-      // navigation.navigate("GuessScreen", {
-      //   result: result,
-      // });
-      // console.log(results);
-      // navigation.navigate("GuessScreen", { result: result });
+      console.log(results);
+      // History.push(result);
     } catch (error) {
       console.log("error: ", error);
     }

@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   result: {
-    marginTop: 40,
+    marginTop: 30,
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 30,
