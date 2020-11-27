@@ -28,11 +28,11 @@ const GuessScreen = ({ route }) => {
           </View>
           <View style={styles.box}>
             <Text style={styles.textLeft}>Số phòng ngủ:</Text>
-            <Text style={styles.textRight}>{route.params?.bedroom}</Text>
+            <Text style={styles.textRight}>{route.params?.bedroom} phòng</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.textLeft}>Số nhà vệ sinh:</Text>
-            <Text style={styles.textRight}>{route.params?.toilet}</Text>
+            <Text style={styles.textRight}>{route.params?.toilet} phòng</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.textLeft}>Diện tích:</Text>
@@ -40,11 +40,19 @@ const GuessScreen = ({ route }) => {
           </View>
           <View style={styles.box}>
             <Text style={styles.textLeft}>Nội thất:</Text>
-            <Text style={styles.textRight}>{route.params?.furniture}</Text>
+            {route.params?.furniture ? (
+              <Text style={styles.textRight}>{route.params?.furniture}</Text>
+            ) : (
+              <Text style={styles.textRight}>Không</Text>
+            )}
           </View>
           <View style={styles.box}>
             <Text style={styles.textLeft}>Pháp lý: </Text>
-            <Text style={styles.textRight}>{route.params?.law}</Text>
+            {route.params?.law ? (
+              <Text style={styles.textRight}>{route.params?.law}</Text>
+            ) : (
+              <Text style={styles.textRight}>Không</Text>
+            )}
           </View>
           <View style={styles.box}>
             <Text style={[styles.textLeft, { color: "red" }]}>{a} Giá:</Text>
